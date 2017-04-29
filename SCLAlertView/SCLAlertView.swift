@@ -319,6 +319,12 @@ open class SCLAlertView: UIViewController {
             viewTextHeight = min(customSubview.frame.height, maxViewTextHeight)
             viewText.text = ""
             viewText.addSubview(customSubview)
+            if #available(iOS 9.0, *), !customSubview.translatesAutoresizingMaskIntoConstraints {
+                customSubview.topAnchor.constraint(equalTo: viewText.topAnchor).isActive = true
+                customSubview.bottomAnchor.constraint(equalTo: viewText.bottomAnchor).isActive = true
+                customSubview.leadingAnchor.constraint(equalTo: viewText.leadingAnchor).isActive = true
+                customSubview.trailingAnchor.constraint(equalTo: viewText.trailingAnchor).isActive = true
+            }
         } else {
             // computing the right size to use for the textView
             let suggestedViewTextSize = viewText.sizeThatFits(CGSize(width: viewTextWidth, height: CGFloat.greatestFiniteMagnitude))
